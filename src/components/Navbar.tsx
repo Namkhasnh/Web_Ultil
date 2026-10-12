@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Brand } from "@/components/Brand";
 
@@ -11,6 +12,11 @@ const links = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
+  function linkColor(href: string) {
+    if (pathname !== href) return "text-soft";
+    return href === "/image-tools" ? "text-[#3B6EF6]" : href === "/pdf-tools" ? "text-[#FF5470]" : "text-[#8B5CF6]";
+  }
   const [menuOpen, setMenuOpen] = useState(false);
   const [dark, setDark] = useState(false);
 
@@ -39,14 +45,14 @@ export function Navbar() {
             <span aria-hidden="true">{dark ? "☀️" : "🌙"}</span>
           </button>
           <nav aria-label="Main navigation" className="hidden items-center gap-[clamp(14px,2.4vw,28px)] min-[760px]:flex">
-            {links.map(link => <Link key={link.href} href={link.href} className="flex min-h-11 items-center rounded-md text-[15px] font-semibold text-soft transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9061F0]">{link.label}</Link>)}
+            {links.map(link => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined} className={`flex min-h-11 items-center rounded-md text-[15px] font-semibold ${linkColor(link.href)} transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9061F0]`}>{link.label}</Link>)}
             <Link href="/pdf-tools" className="flex min-h-11 items-center rounded-[11px] bg-[#0F1222] px-[17px] text-sm font-bold text-white transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9061F0]">Open app</Link>
           </nav>
           <button type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)} className="flex size-11 cursor-pointer items-center justify-center rounded-[10px] bg-surface2 text-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9061F0] min-[760px]:hidden"><span aria-hidden="true">{menuOpen ? "✕" : "☰"}</span></button>
         </div>
       </div>
       {menuOpen && <nav id="mobile-navigation" aria-label="Mobile navigation" onKeyDown={event => { if (event.key === "Escape") setMenuOpen(false); }} className="flex flex-col bg-surface px-5 pt-2 pb-4 min-[760px]:hidden">
-        {links.map(link => <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="min-h-11 rounded-md border-b border-border px-1.5 py-[13px] font-semibold text-soft last:border-0 hover:bg-surface2 focus-visible:outline-2 focus-visible:outline-[#9061F0]"><span aria-hidden="true">{link.icon} </span>{link.label}</Link>)}
+        {links.map(link => <Link key={link.href} href={link.href} aria-current={pathname === link.href ? "page" : undefined} onClick={() => setMenuOpen(false)} className={`min-h-11 rounded-md border-b border-border px-1.5 py-[13px] font-semibold ${linkColor(link.href)} last:border-0 hover:bg-surface2 focus-visible:outline-2 focus-visible:outline-[#9061F0]`}><span aria-hidden="true">{link.icon} </span>{link.label}</Link>)}
       </nav>}
     </header>
   );
