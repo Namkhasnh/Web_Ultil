@@ -1,33 +1,61 @@
-# 🚀 ChatGPT & Codex Coding Thực Chiến - Từ Beginner đến Pro - Hỏi Dân IT (@hoidanit)
+# WebUtil
 
-This is the **starter project** for the **ChatGPT & Codex Coding Thực Chiến - Từ Beginner đến Pro** course by **Hỏi Dân IT**.
+WebUtil is a web app concept for everyday file and content tasks. It brings PDF utilities, image tools, and AI-assisted news summaries together in one place.
 
----
+## What WebUtil is designed to do
 
-## 📢 IMPORTANT NOTICE  
-This source code is provided **exclusively for enrolled students** in this course.  
-❌ **DO NOT UPLOAD this code to GitHub (Public), GitLab, or any other public repository.**  
-❌ **DO NOT SHARE this project on forums, Telegram, Discord, or social media.**  
-✅ You **can use Git** for personal learning, but **your repository must be PRIVATE**.
+### PDF tools
 
-💡 **Violators may face:**  
-- DMCA takedown requests.  
-- Account suspension on learning platforms.  
-- Legal action in serious cases.  
+- Merge multiple PDF files into one.
+- Split a PDF by selected pages or page ranges.
+- Compress a PDF where possible.
+- Attempt to remove simple visible watermarks. Results depend on how the PDF was created.
 
-📩 For inquiries, contact: **admin@hoidanit.vn**
+### Image tools
 
----
+- Resize images by dimensions or scale.
+- Convert images to formats such as PNG, JPEG, and WebP.
+- Compress images with adjustable compression.
 
+### AI newsletter
 
-## Về tác giả
-Mọi thông tin về Tác giả Hỏi Dân IT, các bạn có thể tìm kiếm tại đây:
+- Collect news from supported public sources or user-provided URLs.
+- Select articles and generate concise AI summaries.
+- Combine summaries into a newsletter draft.
 
-Website chính thức: https://hoidanit.vn/
+## Current project status
 
-Youtube “Hỏi Dân IT” : https://www.youtube.com/@hoidanit
+The current build contains the WebUtil landing page, which introduces these three tool areas. The PDF, image, and newsletter tools are planned capabilities; their application pages and processing workflows are not yet implemented.
 
-Tiktok “Hỏi Dân IT” :  https://www.tiktok.com/@hoidanit
+## Privacy goals
 
-Fanpage “Hỏi Dân IT” : https://www.facebook.com/askITwithERIC/
+- PDF and image processing is intended to happen in the browser, so files do not need to be uploaded for those tasks.
+- Newsletter summarization is intended to use a server-side API route to call Gemini. Never expose the Gemini API key in client-side code.
+- WebUtil does not currently provide accounts, a database, or persistent file storage.
 
+## Tech stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- Vitest and React Testing Library
+
+## Run locally
+
+Requirements: Node.js and npm.
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Quality checks
+
+```bash
+npm test
+npm run lint
+npm run build
+```
