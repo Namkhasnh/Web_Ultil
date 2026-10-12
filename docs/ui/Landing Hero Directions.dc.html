@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes floaty2 { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-14px) rotate(-3deg); } }
+</style>
+</helmet>
+
+<div style="font-family: 'Inter', sans-serif; background: #EEF1F6; min-height: 100vh; padding: 56px 56px 140px;">
+
+  <div style="max-width: 1320px; margin: 0 auto 8px;">
+    <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 30px; color: #0F1222; letter-spacing: -0.02em;">WebUtil — Landing Hero Directions</div>
+    <div style="color: #6B7280; font-size: 15px; margin-top: 6px;">Three directions for the homepage hero + navbar. Pick one (or mix) and I'll build the full connected prototype.</div>
+  </div>
+
+  <!-- ================= DIRECTION A : Centered Spotlight ================= -->
+  <div style="max-width: 1320px; margin: 48px auto 0;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+      <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:#7C3AED;">Direction A</span>
+      <span style="font-weight:700; color:#0F1222; font-size:16px;">Centered Spotlight</span>
+      <span style="color:#9098A6; font-size:14px;">— soft gradient mesh, one big promise, module CTAs as pills</span>
+    </div>
+    <div style="background:#fff; border-radius:24px; box-shadow:0 24px 60px -28px rgba(20,20,60,.28); overflow:hidden; border:1px solid #E7E9F0;">
+      <div style="position:relative; width:100%; height:660px; background:radial-gradient(1100px 480px at 18% -8%, #EDE6FF 0%, rgba(237,230,255,0) 60%), radial-gradient(900px 460px at 92% 8%, #FFE6F0 0%, rgba(255,230,240,0) 58%), radial-gradient(900px 600px at 60% 120%, #E0F2FF 0%, rgba(224,242,255,0) 55%), #FBFBFE; overflow:hidden;">
+
+        <!-- navbar -->
+        <div style="position:absolute; top:0; left:0; right:0; height:74px; display:flex; align-items:center; justify-content:space-between; padding:0 40px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg,#7C3AED,#EC4899); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-family:'Plus Jakarta Sans',sans-serif;">W</div>
+            <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:20px; color:#0F1222;">WebUtil</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:30px;">
+            <span style="font-weight:600; color:#4B5160; font-size:15px;">PDF Tools</span>
+            <span style="font-weight:600; color:#4B5160; font-size:15px;">Image Tools</span>
+            <span style="font-weight:600; color:#4B5160; font-size:15px;">AI Newsletter</span>
+            <span style="font-weight:700; color:#fff; font-size:15px; background:#0F1222; padding:10px 18px; border-radius:11px;">Open app</span>
+          </div>
+        </div>
+
+        <!-- floating tool chips -->
+        <div style="position:absolute; left:70px; top:200px; animation:floaty 6s ease-in-out infinite; background:#fff; border:1px solid #EFE6FF; border-radius:18px; padding:14px 16px; box-shadow:0 18px 36px -18px rgba(124,58,237,.4); display:flex; align-items:center; gap:11px;">
+          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#FF5470,#FF9A3C);display:flex;align-items:center;justify-content:center;font-size:20px;">📄</div>
+          <div><div style="font-weight:700;color:#0F1222;font-size:14px;">Merge PDFs</div><div style="color:#9098A6;font-size:12px;">drag &amp; drop</div></div>
+        </div>
+        <div style="position:absolute; right:80px; top:168px; animation:floaty 7s ease-in-out infinite .8s; background:#fff; border:1px solid #E2F0FF; border-radius:18px; padding:14px 16px; box-shadow:0 18px 36px -18px rgba(59,110,246,.4); display:flex; align-items:center; gap:11px;">
+          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#3B6EF6,#22D3EE);display:flex;align-items:center;justify-content:center;font-size:20px;">🖼️</div>
+          <div><div style="font-weight:700;color:#0F1222;font-size:14px;">Resize image</div><div style="color:#9098A6;font-size:12px;">any format</div></div>
+        </div>
+        <div style="position:absolute; right:140px; bottom:96px; animation:floaty 6.5s ease-in-out infinite .4s; background:#fff; border:1px solid #F0E6FF; border-radius:18px; padding:14px 16px; box-shadow:0 18px 36px -18px rgba(139,92,246,.4); display:flex; align-items:center; gap:11px;">
+          <div style="width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#8B5CF6,#EC4899);display:flex;align-items:center;justify-content:center;font-size:20px;">✨</div>
+          <div><div style="font-weight:700;color:#0F1222;font-size:14px;">AI digest</div><div style="color:#9098A6;font-size:12px;">in seconds</div></div>
+        </div>
+
+        <!-- center content -->
+        <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding-top:40px;">
+          <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(124,58,237,.08); border:1px solid rgba(124,58,237,.18); color:#7C3AED; font-weight:600; font-size:13.5px; padding:7px 14px; border-radius:999px;">✦ Three tools, zero friction</div>
+          <h1 style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:62px; line-height:1.05; letter-spacing:-0.03em; color:#0F1222; margin:22px 0 0; max-width:780px;">All your everyday tools,<br><span style="background:linear-gradient(120deg,#7C3AED,#EC4899 55%,#FF9A3C);-webkit-background-clip:text;background-clip:text;color:transparent;">in one playful place.</span></h1>
+          <p style="color:#5A6072; font-size:19px; line-height:1.5; max-width:560px; margin:20px 0 0;">Fix PDFs, transform images, and spin up an AI newsletter — all in your browser. No sign-up, no waiting.</p>
+          <div style="display:flex; gap:14px; margin-top:32px;">
+            <span style="display:inline-flex;align-items:center;gap:9px;font-weight:700;color:#fff;font-size:15px;background:linear-gradient(135deg,#FF5470,#FF9A3C);padding:14px 22px;border-radius:13px;box-shadow:0 14px 28px -12px rgba(255,84,112,.6);">📄 PDF Tools</span>
+            <span style="display:inline-flex;align-items:center;gap:9px;font-weight:700;color:#fff;font-size:15px;background:linear-gradient(135deg,#3B6EF6,#22D3EE);padding:14px 22px;border-radius:13px;box-shadow:0 14px 28px -12px rgba(59,110,246,.6);">🖼️ Image Tools</span>
+            <span style="display:inline-flex;align-items:center;gap:9px;font-weight:700;color:#fff;font-size:15px;background:linear-gradient(135deg,#8B5CF6,#EC4899);padding:14px 22px;border-radius:13px;box-shadow:0 14px 28px -12px rgba(139,92,246,.6);">✨ AI Newsletter</span>
+          </div>
+          <div style="color:#9098A6; font-size:13.5px; margin-top:22px;">100% in-browser · Free · Files never leave your device</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DIRECTION B : Asymmetric Split ================= -->
+  <div style="max-width: 1320px; margin: 64px auto 0;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+      <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:#EC4899;">Direction B</span>
+      <span style="font-weight:700; color:#0F1222; font-size:16px;">Asymmetric Split</span>
+      <span style="color:#9098A6; font-size:14px;">— headline left, a playful stacked deck of module cards right</span>
+    </div>
+    <div style="background:#fff; border-radius:24px; box-shadow:0 24px 60px -28px rgba(20,20,60,.28); overflow:hidden; border:1px solid #E7E9F0;">
+      <div style="position:relative; width:100%; height:660px; background:#0E1020; overflow:hidden;">
+        <div style="position:absolute; width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,#7C3AED55,transparent 65%);top:-160px;left:-120px;"></div>
+        <div style="position:absolute; width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,#EC489944,transparent 65%);bottom:-220px;right:-80px;"></div>
+
+        <!-- navbar -->
+        <div style="position:absolute; top:0; left:0; right:0; height:74px; display:flex; align-items:center; justify-content:space-between; padding:0 44px;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg,#7C3AED,#EC4899); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-family:'Plus Jakarta Sans',sans-serif;">W</div>
+            <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:20px; color:#fff;">WebUtil</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:30px;">
+            <span style="font-weight:600; color:#B9BECC; font-size:15px;">PDF Tools</span>
+            <span style="font-weight:600; color:#B9BECC; font-size:15px;">Image Tools</span>
+            <span style="font-weight:600; color:#B9BECC; font-size:15px;">AI Newsletter</span>
+            <span style="font-weight:700; color:#0E1020; font-size:15px; background:#fff; padding:10px 18px; border-radius:11px;">Open app</span>
+          </div>
+        </div>
+
+        <!-- left text -->
+        <div style="position:absolute; left:64px; top:170px; width:520px;">
+          <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); color:#E7D7FF; font-weight:600; font-size:13.5px; padding:7px 14px; border-radius:999px;">✦ The toolkit that does the boring stuff</div>
+          <h1 style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:58px; line-height:1.04; letter-spacing:-0.03em; color:#fff; margin:22px 0 0;">Three tools.<br>One tab.<br><span style="background:linear-gradient(120deg,#C4B5FD,#F9A8D4);-webkit-background-clip:text;background-clip:text;color:transparent;">Zero friction.</span></h1>
+          <p style="color:#A6ABBC; font-size:18px; line-height:1.55; margin:22px 0 0; max-width:430px;">PDFs, images, and an AI-powered newsletter — done right in the browser. Pick a tool and go.</p>
+          <div style="display:flex; gap:13px; margin-top:30px;">
+            <span style="font-weight:700; color:#0E1020; font-size:15px; background:#fff; padding:14px 24px; border-radius:13px;">Get started →</span>
+            <span style="font-weight:700; color:#fff; font-size:15px; border:1px solid rgba(255,255,255,.22); padding:14px 24px; border-radius:13px;">See how it works</span>
+          </div>
+        </div>
+
+        <!-- right stacked cards -->
+        <div style="position:absolute; right:90px; top:150px; width:360px; height:420px;">
+          <div style="position:absolute; top:212px; right:0; width:340px; padding:22px; border-radius:22px; background:linear-gradient(135deg,#8B5CF6,#EC4899); transform:rotate(5deg); box-shadow:0 30px 60px -24px rgba(139,92,246,.7); animation:floaty 7s ease-in-out infinite 1s;">
+            <div style="font-size:26px;">✨</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; color:#fff; font-size:20px; margin-top:10px;">AI Newsletter</div>
+            <div style="color:rgba(255,255,255,.85); font-size:14px; margin-top:4px;">Auto-collect + summarize the news.</div>
+          </div>
+          <div style="position:absolute; top:106px; right:18px; width:340px; padding:22px; border-radius:22px; background:linear-gradient(135deg,#3B6EF6,#22D3EE); transform:rotate(-4deg); box-shadow:0 30px 60px -24px rgba(59,110,246,.7); animation:floaty 6.5s ease-in-out infinite .5s;">
+            <div style="font-size:26px;">🖼️</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; color:#fff; font-size:20px; margin-top:10px;">Image Tools</div>
+            <div style="color:rgba(255,255,255,.9); font-size:14px; margin-top:4px;">Resize, convert &amp; compress.</div>
+          </div>
+          <div style="position:absolute; top:0; right:6px; width:340px; padding:22px; border-radius:22px; background:linear-gradient(135deg,#FF5470,#FF9A3C); transform:rotate(2deg); box-shadow:0 30px 60px -24px rgba(255,84,112,.7); animation:floaty 6s ease-in-out infinite;">
+            <div style="font-size:26px;">📄</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; color:#fff; font-size:20px; margin-top:10px;">PDF Tools</div>
+            <div style="color:rgba(255,255,255,.9); font-size:14px; margin-top:4px;">Merge, split, compress, clean.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= DIRECTION C : Bento ================= -->
+  <div style="max-width: 1320px; margin: 64px auto 0;">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+      <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:#FF7A3C;">Direction C</span>
+      <span style="font-weight:700; color:#0F1222; font-size:16px;">Bento Modules</span>
+      <span style="color:#9098A6; font-size:14px;">— short headline, then a colorful bento where each tile IS a module</span>
+    </div>
+    <div style="background:#fff; border-radius:24px; box-shadow:0 24px 60px -28px rgba(20,20,60,.28); overflow:hidden; border:1px solid #E7E9F0;">
+      <div style="position:relative; width:100%; height:680px; background:#F7F6FB; overflow:hidden; padding:0 40px 40px;">
+
+        <!-- navbar -->
+        <div style="height:74px; display:flex; align-items:center; justify-content:space-between;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:10px; background:linear-gradient(135deg,#7C3AED,#EC4899); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-family:'Plus Jakarta Sans',sans-serif;">W</div>
+            <span style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:20px; color:#0F1222;">WebUtil</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:30px;">
+            <span style="font-weight:600; color:#4B5160; font-size:15px;">PDF Tools</span>
+            <span style="font-weight:600; color:#4B5160; font-size:15px;">Image Tools</span>
+            <span style="font-weight:600; color:#4B5160; font-size:15px;">AI Newsletter</span>
+            <span style="font-weight:700; color:#fff; font-size:15px; background:#0F1222; padding:10px 18px; border-radius:11px;">Open app</span>
+          </div>
+        </div>
+
+        <!-- headline row -->
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-top:26px;">
+          <h1 style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:52px; line-height:1.02; letter-spacing:-0.03em; color:#0F1222; margin:0; max-width:640px;">Everything you keep googling “online free tool” for. ✨</h1>
+          <p style="color:#5A6072; font-size:16px; line-height:1.5; max-width:300px; margin:0 0 8px;">Three little apps that respect your time — and never upload your files.</p>
+        </div>
+
+        <!-- bento grid -->
+        <div style="display:grid; grid-template-columns: 1.35fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap:18px; margin-top:30px; height:360px;">
+          <!-- big PDF -->
+          <div style="grid-row:span 2; border-radius:22px; padding:26px; background:linear-gradient(150deg,#FF5470,#FF9A3C); color:#fff; position:relative; overflow:hidden; box-shadow:0 22px 44px -22px rgba(255,84,112,.6);">
+            <div style="font-size:34px;">📄</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:30px; margin-top:14px;">PDF Tools</div>
+            <div style="color:rgba(255,255,255,.92); font-size:16px; margin-top:8px; max-width:240px;">Merge, split, compress and strip watermarks in a couple of clicks.</div>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:20px;">
+              <span style="background:rgba(255,255,255,.2); padding:7px 13px; border-radius:999px; font-size:13px; font-weight:600;">Merge</span>
+              <span style="background:rgba(255,255,255,.2); padding:7px 13px; border-radius:999px; font-size:13px; font-weight:600;">Split</span>
+              <span style="background:rgba(255,255,255,.2); padding:7px 13px; border-radius:999px; font-size:13px; font-weight:600;">Compress</span>
+              <span style="background:rgba(255,255,255,.2); padding:7px 13px; border-radius:999px; font-size:13px; font-weight:600;">Watermark</span>
+            </div>
+            <span style="position:absolute; bottom:24px; left:26px; font-weight:700; font-size:15px;">Open PDF Tools →</span>
+          </div>
+          <!-- Image -->
+          <div style="grid-column:span 2; border-radius:22px; padding:26px; background:linear-gradient(135deg,#3B6EF6,#22D3EE); color:#fff; position:relative; overflow:hidden; box-shadow:0 22px 44px -22px rgba(59,110,246,.6); display:flex; justify-content:space-between;">
+            <div>
+              <div style="font-size:30px;">🖼️</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:26px; margin-top:12px;">Image Tools</div>
+              <div style="color:rgba(255,255,255,.92); font-size:15px; margin-top:6px; max-width:300px;">Resize, convert formats and compress — with a live before/after.</div>
+            </div>
+            <span style="align-self:flex-end; font-weight:700; font-size:15px;">Open →</span>
+          </div>
+          <!-- Newsletter -->
+          <div style="border-radius:22px; padding:24px; background:linear-gradient(150deg,#8B5CF6,#EC4899); color:#fff; position:relative; box-shadow:0 22px 44px -22px rgba(139,92,246,.6);">
+            <div style="font-size:28px;">✨</div>
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:22px; margin-top:10px;">AI Newsletter</div>
+            <div style="color:rgba(255,255,255,.92); font-size:14px; margin-top:6px;">Auto-collect &amp; summarize.</div>
+          </div>
+          <!-- stat tile -->
+          <div style="border-radius:22px; padding:24px; background:#0F1222; color:#fff; display:flex; flex-direction:column; justify-content:center;">
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:36px;">&lt; 3 clicks</div>
+            <div style="color:#A6ABBC; font-size:14px; margin-top:6px;">to finish any task. Everything runs locally in your browser.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+</body>
+</html>
