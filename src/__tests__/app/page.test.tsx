@@ -1,54 +1,16 @@
-import { render, screen } from '@testing-library/react'
-import Home from '@/app/page'
+import { render, screen } from "@testing-library/react";
+import Home from "@/app/page";
 
-// next/image mock để tránh lỗi khi test ngoài môi trường Next.js
-vi.mock('next/image', () => ({
-  default: (props: React.ImgHTMLAttributes<HTMLImageElement> & { priority?: boolean }) => {
-    const { priority, ...rest } = props
-    return <img {...rest} />
-  },
-}))
+describe("WebUtil home", () => {
+  it("renders the landing content and tool destinations", () => {
+    render(<Home />);
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("All your everyday tools,in one playful place.");
+    expect(screen.getByRole("heading", { name: "How it works" })).toBeInTheDocument();
+    for (const [name, href] of [["PDF Tools", "/pdf-tools"], ["Image Tools", "/image-tools"], ["AI Newsletter", "/ai-newsletter"]]) {
+      for (const link of screen.getAllByRole("link", { name: new RegExp(name) })) {
+        expect(link).toHaveAttribute("href", href);
+      }
+    }
+  });
 
-describe('Home page', () => {
-  beforeEach(() => {
-    render(<Home />)
-  })
-
-  it('renders the Next.js logo', () => {
-    const logo = screen.getByAltText('Next.js logo')
-    expect(logo).toBeInTheDocument()
-    expect(logo).toHaveAttribute('src', '/next.svg')
-  })
-
-  it('renders the heading text', () => {
-    expect(
-      screen.getByRole('heading', { name: /to get started, edit the page\.tsx file/i })
-    ).toBeInTheDocument()
-  })
-
-  it('renders the author credit', () => {
-    expect(screen.getByText(/Created by @hoidanit/i)).toBeInTheDocument()
-  })
-
-  it('renders the AI & Coding link pointing to hoidanit.vn', () => {
-    const link = screen.getByRole('link', { name: /AI & Coding/i })
-    expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute('href', 'https://hoidanit.vn/khoa-hoc?type=vibecoding')
-    expect(link).toHaveAttribute('target', '_blank')
-    expect(link).toHaveAttribute('rel', 'noopener noreferrer')
-  })
-
-  it('renders the Documentation link pointing to hoidanit.vn', () => {
-    const link = screen.getByRole('link', { name: /Documentation/i })
-    expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute('href', 'https://hoidanit.vn/')
-    expect(link).toHaveAttribute('target', '_blank')
-    expect(link).toHaveAttribute('rel', 'noopener noreferrer')
-  })
-
-  it('renders the Vercel logo inside the AI & Coding link', () => {
-    const logo = screen.getByAltText('Vercel logomark')
-    expect(logo).toBeInTheDocument()
-    expect(logo).toHaveAttribute('src', '/vercel.svg')
-  })
-})
+});

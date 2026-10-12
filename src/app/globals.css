@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #fbfbfe;
+  --surface: #ffffff;
+  --surface2: #f4f4f8;
+  --text: #0f1222;
+  --soft: #4b5160;
+  --mute: #9098a6;
+  --border: #ececf3;
+  --input-border: #e7e9f0;
+  --nav: rgba(251, 251, 254, .82);
+  --hero: radial-gradient(1100px 480px at 16% -10%, #ede6ff, transparent 60%), radial-gradient(950px 480px at 94% 6%, #ffe6f0, transparent 58%), radial-gradient(900px 600px at 60% 130%, #e0f2ff, transparent 55%), #fbfbfe;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0c0d15;
+  --surface: #15161f;
+  --surface2: #1e202c;
+  --text: #f3f4fa;
+  --soft: #b7bccb;
+  --mute: #8a91a2;
+  --border: #262838;
+  --input-border: #2e3142;
+  --nav: rgba(12, 13, 21, .82);
+  --hero: radial-gradient(1100px 480px at 16% -10%, #2a1e4a, transparent 62%), radial-gradient(950px 480px at 94% 6%, #3a1730, transparent 58%), radial-gradient(900px 600px at 60% 130%, #10243a, transparent 55%), #0c0d15;
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-foreground: var(--text);
+  --color-soft: var(--soft);
+  --color-mute: var(--mute);
+  --color-border: var(--border);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-jakarta);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  --animate-floaty: floaty 6s ease-in-out infinite;
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
