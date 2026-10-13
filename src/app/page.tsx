@@ -40,7 +40,7 @@ export default function Home() {
         }
       />
       <BentoGrid label="Explore tools">
-        <ToolCard variant="pdf" href="/pdf-tools" title="PDF Tools" icon="📄" description="Merge, split, compress and strip watermarks in a couple of clicks." tags={["Merge", "Split", "Compress", "Watermark"]} cta="Open PDF Tools →" />
+        <ToolCard variant="pdf" href="/pdf-tools" title="PDF Tools" icon="📄" description="Merge PDFs or extract selected pages in a couple of clicks." tags={["Merge", "Split"]} cta="Open PDF Tools →" />
         <ToolCard variant="image" href="/image-tools" title="Image Tools" icon="🖼️" description="Resize, convert formats and compress — with a live before/after preview." cta="Open →" />
         <ToolCard variant="newsletter" href="/ai-newsletter" title="AI Newsletter" icon="✨" description="Auto-collect & summarize the news." />
         <StatCard title="< 3 clicks" description="to finish any task. Everything runs locally — your files stay on your device." />

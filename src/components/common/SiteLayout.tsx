@@ -7,7 +7,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
     <>
       <a href="#main-content" className="sr-only z-[60] rounded-lg bg-surface p-3 focus:not-sr-only focus:fixed focus:top-3 focus:left-3">Skip to content</a>
       <Navbar />
-      <main id="main-content">{children}</main>
+      <main id="main-content" className="flex-1">{children}</main>
       <Footer />
     </>
   );
