@@ -14,6 +14,13 @@ export type PDFFile = {
 };
 export type PDFCompressOptions = { level: CompressLevel };
 export type PDFSplitOptions = { ranges: string };
+export type PDFCompressionStats = {
+  level: CompressLevel;
+  imagesFound: number;
+  imagesCompressed: number;
+  imagesSkipped: number;
+  imagesSupported: number;
+};
 export type PDFProcessResult = {
   operation: PDFOperation;
   outputFileName: string;
@@ -21,4 +28,5 @@ export type PDFProcessResult = {
   originalSize: number;
   outputSize: number;
   createdAt: ISODateString;
+  compression?: PDFCompressionStats;
 };

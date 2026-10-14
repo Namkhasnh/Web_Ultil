@@ -1,8 +1,9 @@
+import { PDFDocument, PDFName, PDFNumber, PDFRawStream } from "pdf-lib";
 import { act, fireEvent, render, renderHook, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { PdfTools } from "@/features/pdf-tools";
 import { usePdfProcessor } from "@/features/pdf-tools/hooks/usePdfProcessor";
-import { compressionPdfFile, installPdfFileReader, pdfFile } from "./pdf-test-utils";
+import { blobBytes, compressionPdfFile, installPdfFileReader, pdfFile } from "./pdf-test-utils";
 
 describe("Compress PDF integration", () => {
   beforeEach(() => installPdfFileReader());
@@ -26,7 +27,9 @@ describe("Compress PDF integration", () => {
     const result = await screen.findByRole("status", { name: "PDF result" });
     expect(result).toHaveTextContent("report-compressed.pdf");
     expect(result).toHaveTextContent(/% saved/);
-    expect(result).toHaveTextContent("Text and image quality preserved.");
+    expect(result).toHaveTextContent("Maximum · 0 images found · 0 compressed · 0 unchanged");
+    expect(result).toHaveTextContent("No supported embedded images found.");
+    expect(result).toHaveTextContent("Selectable text, forms, and page layout preserved. Image quality may decrease.");
     await user.click(screen.getByRole("button", { name: "Download PDF" }));
     expect(download).toHaveBeenCalledOnce();
     expect(createUrl.mock.calls[0][0]).toBeInstanceOf(Blob);
@@ -49,6 +52,39 @@ describe("Compress PDF integration", () => {
     expect(button).toBeDisabled();
   });
 
+  it("compresses an embedded image through upload, option changes and the hook", async () => {
+    const doc = await PDFDocument.create({ updateMetadata: false });
+    doc.addPage().drawText("Keep this text");
+    const pixels = new Uint8Array(120 * 120 * 3);
+    for (let i = 0; i < pixels.length; i++) pixels[i] = (i * 97 + (i >> 3)) % 256;
+    const reference = doc.context.register(doc.context.flateStream(pixels, { Type: "XObject", Subtype: "Image", Width: 120, Height: 120, BitsPerComponent: 8, ColorSpace: "DeviceRGB" }));
+    doc.getPage(0).node.Resources()?.set(PDFName.of("XObject"), doc.context.obj({ Image: reference }));
+    const bytes = new Uint8Array(await doc.save({ useObjectStreams: false }));
+    const file = new File([bytes], "photo.pdf", { type: "application/pdf" });
+    vi.stubGlobal("ImageData", class { constructor(public data: Uint8ClampedArray, public width: number, public height: number) {} });
+    vi.spyOn(HTMLCanvasElement.prototype, "getContext").mockReturnValue({ putImageData: vi.fn(), drawImage: vi.fn() } as unknown as CanvasRenderingContext2D);
+    const encode = vi.spyOn(HTMLCanvasElement.prototype, "toBlob").mockImplementation((callback, mime) => {
+      const encoded = new Uint8Array(100).fill(1); encoded.set([255, 216], 0); encoded.set([255, 217], 98);
+      const blob = new Blob([encoded], { type: mime });
+      Object.defineProperty(blob, "arrayBuffer", { value: () => blobBytes(blob) }); callback(blob);
+    });
+    const { result } = renderHook(() => usePdfProcessor());
+    act(() => result.current.changeOperation("compress"));
+    await act(async () => { await result.current.addFiles([file]); });
+    act(() => result.current.updateCompressLevel("low"));
+    await act(async () => { await result.current.process(); });
+    expect(result.current.result?.compression).toMatchObject({ level: "low", imagesFound: 1, imagesCompressed: 1, imagesSkipped: 0 });
+    expect(encode.mock.calls[0][2]).toBe(0.9);
+    act(() => result.current.updateCompressLevel("high")); expect(result.current.result).toBeNull();
+    await act(async () => { await result.current.process(); });
+    expect(result.current.result?.compression).toMatchObject({ level: "high", imagesCompressed: 1 });
+    expect(encode.mock.calls[1][2]).toBe(0.55);
+    const output = await PDFDocument.load(await blobBytes(result.current.result!.outputBlob), { updateMetadata: false });
+    const image = output.context.lookup(reference) as PDFRawStream;
+    expect(image.dict.lookup(PDFName.of("Width"), PDFNumber).asNumber()).toBe(120);
+    expect(result.current.result!.outputSize).toBeLessThan(file.size);
+  });
+
   it("reports unchanged size when the original PDF is returned", async () => {
     const user = userEvent.setup(); render(<PdfTools />);
     await user.click(screen.getByRole("tab", { name: "Compress" }));
@@ -58,7 +94,7 @@ describe("Compress PDF integration", () => {
     await waitFor(() => expect(button).toBeEnabled()); await user.click(button);
     const result = await screen.findByRole("status", { name: "PDF result" });
     expect(result).toHaveTextContent("0.0% saved");
-    expect(result).toHaveTextContent("This PDF is already optimized; file size did not decrease.");
+    expect(result).toHaveTextContent("Could not reduce file size with this level; the original file is returned.");
   });
 
   it("exposes lifecycle, locks actions, invalidates options and recovers from invalid input", async () => {

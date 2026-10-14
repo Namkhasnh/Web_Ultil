@@ -1,5 +1,6 @@
 import { PDFArray, PDFDict, PDFDocument, PDFObject, PDFRef, PDFStream, PDFName } from "pdf-lib";
 import type { PDFCompressOptions, PDFProcessResult } from "../types";
+import { compressPdfImages } from "./compress-pdf-images";
 import { createPdfResult } from "./pdf-result";
 import { loadPdf, PdfToolError } from "./pdf-validation";
 
@@ -39,10 +40,15 @@ export async function compressPdf(file: File, options: PDFCompressOptions): Prom
       document.catalog.delete(PDFName.of("Metadata"));
       deleteUnreferencedMetadata(document, metadata);
     }
+    const compression = await compressPdfImages(document, options.level);
     const bytes = await document.save({ useObjectStreams: true, updateFieldAppearances: false, objectsPerTick: 25 });
     const output = bytes.length < file.size ? bytes : new Uint8Array(await file.arrayBuffer());
     const name = file.name.replace(/\.pdf$/i, "") || "document";
-    return createPdfResult(output, "compress", `${name}-compressed.pdf`, file.size);
+    if (bytes.length >= file.size) {
+      compression.imagesCompressed = 0;
+      compression.imagesSkipped = compression.imagesFound;
+    }
+    return { ...createPdfResult(output, "compress", `${name}-compressed.pdf`, file.size), compression };
   } catch {
     throw new PdfToolError("Could not compress this PDF. Try another file.");
   }

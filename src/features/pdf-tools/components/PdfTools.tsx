@@ -9,7 +9,7 @@ import { PdfResult } from "./PdfResult";
 const tools: { id: SupportedPDFOperation; label: string; icon: string; description: string }[] = [
   { id: "merge", label: "Merge", icon: "🔗", description: "Combine multiple PDFs into one file, in the order you choose." },
   { id: "split", label: "Split", icon: "✂️", description: "Extract selected pages or ranges into a new PDF." },
-  { id: "compress", label: "Compress", icon: "🗜️", description: "Reduce PDF size where possible while keeping text and image quality." },
+  { id: "compress", label: "Compress", icon: "🗜️", description: "Reduce embedded image size while keeping selectable text and forms." },
 ];
 export function PdfTools() {
   const processor = usePdfProcessor();

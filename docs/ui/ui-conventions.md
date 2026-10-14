@@ -111,9 +111,9 @@ Green-tinted card (`rgba(22,163,74,.1)`), ✓ icon, a "Done" line, a result-file
 - **Per-tool options:**
   - *Merge:* combine in the order files appear in the list.
   - *Split:* a "Page range" input (e.g. `1, 3-5, 8` — comma = single pages, hyphen = ranges).
-  - *Compress:* 3 radio levels — Light / Balanced / Maximum.
+  - *Compress:* 3 radio levels — Light (JPEG 90%, longest side 3,200px) / Balanced (default, JPEG 75%, 2,200px) / Maximum (JPEG 55%, 1,400px). Never upscale. Explain that image quality may decrease while selectable text and forms are preserved. Show exact input/output bytes, bytes saved, and counts of images found/compressed/unchanged; identical sizes remain possible.
   - *Remove Watermark:* an "Auto-detect mode" box — strips the annotation/stamp layer on each page.
-- **Real processing with pdf-lib:** merge = copy pages; split = extract pages by range; compress = re-save and clear metadata; watermark = delete `Annots` per page. Build a Blob URL for a real download.
+- **Real processing with pdf-lib:** merge = copy pages; split = extract pages by range; compress = recompress supported embedded JPEG/raw/Flate 8-bit RGB or grayscale images with browser Canvas, replace image streams at their existing references, then re-save with object streams and level-specific metadata cleanup (Light keeps metadata, Balanced removes Info, Maximum also removes document XMP). Leave masks/transparency, unsupported colors/filters, predictors, inline images, and sources over 8,192px per side or 40 megapixels unchanged. Keep original image streams when recompression is not smaller, and return the original PDF if the final output is not smaller; watermark = delete `Annots` per page. Build a Blob URL for a real download.
 
 ### 5.3 Image Tools (`/image`) — blue→cyan accent
 - Header: "🖼️ IMAGE TOOLS" + H1 "Transform your images".

@@ -3,9 +3,9 @@ import type { SupportedPDFOperation } from "../types";
 
 export const pdfPrimaryButton = "min-h-11 cursor-pointer rounded-[13px] bg-linear-135 from-[#FF5470] to-[#FF9A3C] px-5 py-3 text-sm font-bold text-white shadow-[0_14px_28px_-12px_rgba(255,84,112,.6)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5470] disabled:cursor-default disabled:opacity-60";
 const compressionLevels: { value: CompressLevel; label: string; description: string }[] = [
-  { value: "low", label: "Light", description: "Optimize PDF structure; keep document metadata." },
-  { value: "medium", label: "Balanced", description: "Optimize structure and remove document information such as title and author." },
-  { value: "high", label: "Maximum", description: "Balanced optimization plus removal of document XMP metadata." },
+  { value: "low", label: "Light", description: "JPEG quality 90%, up to 3,200px per side. Keep document metadata." },
+  { value: "medium", label: "Balanced", description: "JPEG quality 75%, up to 2,200px per side. Remove title and author metadata." },
+  { value: "high", label: "Maximum", description: "JPEG quality 55%, up to 1,400px per side. Also remove document XMP metadata." },
 ];
 type Props = { operation: SupportedPDFOperation; ranges: string; compressLevel: CompressLevel; onCompressLevelChange: (level: CompressLevel) => void; pageCount?: number; busy: boolean; canProcess: boolean; onChange: (value: string) => void; onProcess: () => Promise<void> };
 export function PdfOptionsForm({ operation, ranges, compressLevel, onCompressLevelChange, pageCount, busy, canProcess, onChange, onProcess }: Props) {
@@ -17,7 +17,7 @@ export function PdfOptionsForm({ operation, ranges, compressLevel, onCompressLev
         <input type="radio" name="pdf-compression-level" value={level.value} checked={compressLevel === level.value} onChange={() => onCompressLevelChange(level.value)} className="mt-1 accent-[#FF5470]" />
         <span><span className="block text-sm font-semibold">{level.label}</span><span className="block text-xs text-soft">{level.description}</span></span>
       </label>)}
-      <p className="text-xs text-soft">Keeps text and image quality. Scanned or already optimized PDFs may not get smaller. If size does not decrease, the original file is returned.</p>
+      <p className="text-xs text-soft">Keeps selectable text, forms, and page layout. Image quality may decrease. Transparent or unsupported images stay unchanged. Different levels may still produce the same size. If size does not decrease, the original file is returned.</p>
     </fieldset>}
     <button type="submit" disabled={!canProcess || busy} className={`mt-5 w-full ${pdfPrimaryButton}`}>{busy ? "Working…" : operation === "merge" ? "Merge PDFs" : operation === "split" ? "Split PDF" : "Compress PDF"}</button>
   </form>;

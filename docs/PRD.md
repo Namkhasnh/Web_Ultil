@@ -57,8 +57,11 @@ MVP features:
 * **Compress PDF**
 
   * User uploads one PDF file
-  * System reduces PDF file size where possible
-  * User downloads the compressed PDF
+  * User selects Light, Balanced (default), or Maximum image compression
+  * System recompresses supported embedded images locally, with progressively lower JPEG quality and maximum dimensions; image quality may decrease
+  * Selectable text, forms, links, and page layout are preserved; unsupported or transparent images stay unchanged
+  * System shows exact byte sizes and image compression statistics; some PDFs may produce identical sizes across levels
+  * User downloads the compressed PDF, or the unchanged original if compression does not reduce size
 
 * **Remove Watermark**
 

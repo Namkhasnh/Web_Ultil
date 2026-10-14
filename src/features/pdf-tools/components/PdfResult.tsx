@@ -6,7 +6,14 @@ import { pdfPrimaryButton } from "./PdfOptionsForm";
 export function PdfResult({ result, onAgain }: { result: PDFProcessResult; onAgain: () => void }) {
   return <section role="status" aria-label="PDF result" className="mt-4 rounded-[18px] border border-green-500/20 bg-green-500/10 p-5 motion-safe:animate-pop-in">
     <h2 className="font-heading text-lg font-bold">✓ Done</h2><p className="mt-3 break-all font-semibold">{result.outputFileName}</p><p className="mt-1 text-sm text-soft">{formatFileSize(result.outputSize)}</p>
-    {result.operation === "compress" && <div className="mt-2 text-sm text-soft"><p>{formatFileSize(result.originalSize)} → {formatFileSize(result.outputSize)} · {((1 - result.outputSize / result.originalSize) * 100).toFixed(1)}% saved</p><p className="mt-2">{result.outputSize < result.originalSize ? "Text and image quality preserved." : "This PDF is already optimized; file size did not decrease."}</p></div>}
+    {result.operation === "compress" && <div className="mt-2 space-y-2 text-sm text-soft">
+      <p>{formatFileSize(result.originalSize)} ({result.originalSize.toLocaleString("en-US")} bytes) → {formatFileSize(result.outputSize)} ({result.outputSize.toLocaleString("en-US")} bytes) · {((1 - result.outputSize / result.originalSize) * 100).toFixed(1)}% saved</p>
+      <p>{(result.originalSize - result.outputSize).toLocaleString("en-US")} bytes saved</p>
+      {result.compression && <p>{({ low: "Light", medium: "Balanced", high: "Maximum" })[result.compression.level]} · {result.compression.imagesFound} images found · {result.compression.imagesCompressed} compressed · {result.compression.imagesSkipped} unchanged</p>}
+      <p>{result.outputSize < result.originalSize ? "Selectable text, forms, and page layout preserved. Image quality may decrease." : "Could not reduce file size with this level; the original file is returned."}</p>
+      {result.compression?.imagesSupported === 0 && <p>No supported embedded images found. Only PDF structure and metadata could be optimized.</p>}
+    </div>}
+
     <div className="mt-4 flex flex-wrap gap-3"><button type="button" onClick={() => downloadBlob(result.outputBlob, result.outputFileName)} className={pdfPrimaryButton}><span aria-hidden="true">⬇ </span>Download PDF</button><button type="button" onClick={onAgain} className="min-h-11 cursor-pointer rounded-xl bg-surface2 px-5 py-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-[#FF5470]">Again</button></div>
   </section>;
 }

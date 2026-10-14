@@ -79,6 +79,14 @@ export type PDFRemoveWatermarkOptions = {
   mode: "basic";
 };
 
+export type PDFCompressionStats = {
+  level: CompressLevel;
+  imagesFound: number;
+  imagesCompressed: number;
+  imagesSkipped: number;
+  imagesSupported: number;
+};
+
 export type PDFProcessResult = {
   operation: PDFOperation;
   outputFileName: string;
@@ -86,11 +94,13 @@ export type PDFProcessResult = {
   originalSize: number;
   outputSize: number;
   createdAt: ISODateString;
+  compression?: PDFCompressionStats;
 };
 ```
 
 Rules:
 
+* `compression` is present for Compress results; counts describe unique embedded image objects. `imagesSkipped` counts all unchanged images, including unsupported images and encodings that did not save bytes. If the original PDF is returned, `imagesCompressed` is zero.
 * `ranges` stores user input such as `"1-3,5,8-10"`.
 * `remove-watermark` is best-effort only.
 * `outputBlob` is temporary and must not be sent to an API Route.

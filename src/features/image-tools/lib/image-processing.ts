@@ -1,3 +1,4 @@
+import { encodeCanvasBlob } from "@/lib/canvas-encoding";
 import { validateFileSize } from "@/lib/file-validation";
 import type { CompressLevel } from "@/types";
 import type { ImageCompressOptions, ImageConvertOptions, ImageMimeType, ImageOperation, ImageOutputFormat, ImageProcessResult, ImageResizeOptions } from "../types";
@@ -66,15 +67,7 @@ export function encodeCanvas(canvas: HTMLCanvasElement, outputFormat: ImageOutpu
   const mime = formats[outputFormat];
   if (!mime) throw new Error("Choose PNG, JPG, or WebP as the output format.");
   if (quality !== undefined) validateQuality(quality);
-  return new Promise((resolve, reject) => {
-    try {
-      canvas.toBlob(blob => {
-        if (!blob) reject(new Error("Could not create the image. Try smaller dimensions."));
-        else if (blob.type !== mime) reject(new Error(`Your browser cannot export ${outputFormat.toUpperCase()}. Choose another format.`));
-        else resolve(blob);
-      }, mime, quality);
-    } catch { reject(new Error("Image export failed. Try smaller dimensions or another format.")); }
-  });
+  return encodeCanvasBlob(canvas, mime, quality);
 }
 
 async function processImage(file: File, operation: ImageOperation, outputFormat: ImageOutputFormat, quality?: number, resizeOptions?: ImageResizeOptions): Promise<ImageProcessResult> {
